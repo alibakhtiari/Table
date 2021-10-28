@@ -31,3 +31,11 @@ promise.catch(error => console.log(error));
 if (result.data.length > 0) {
   console.log('ok')
 }
+
+var dollarp = 0;
+const myRequest = new Request('https://api.accessban.com/v1/data/sana/json');
+fetch(myRequest)
+.then(response => response.json())
+.then(data => {
+  return dollarp = parseFloat(data.sana.data[16].p);
+})
