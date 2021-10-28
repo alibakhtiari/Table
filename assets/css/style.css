@@ -3,6 +3,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.rtl{
+  direction: rtl
+}
+.ltr{
+  direction: ltr
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
