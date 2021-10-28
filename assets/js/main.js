@@ -32,6 +32,9 @@ if (result.data.length > 0) {
   console.log('ok')
 }
 */
+function ThousandSep(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 var dollarp = 0;
 const myRequest = new Request('https://api.accessban.com/v1/data/sana/json');
 fetch(myRequest)
@@ -43,13 +46,12 @@ fetch(myRequest)
     .then(res => res.json())
     .then(data => {
       if (data.data.length > 0) {
-
         var coins = "";
-        data.data.forEach((itemData) => {
-          coins += '<div class="w-full flex flex-col justify-center items-center rounded shadow-lg">';
-          coins += +itemData.rank + '<img class="coin-img w-16 h-16" src="coins/' + itemData.symbol + '.svg" alt="' + itemData.id + '">';
-          coins += '<h2 class="coin-header">' + itemData.id + '<span>' + itemData.symbol + '</span></h2><h5 class="coin-price-usd"> ' + itemData.priceUsd + '</h5><h6 class="coin-price-irr">' + itemData.priceUsd * dollarp + ' ریال </h6><h3 class="coin-per">' + parseFloat(itemData.changePercent24Hr).toFixed(2) + ' %</h3>';
-          coins += '</div>';
+        data.data.forEach((item) => {
+          coins += '<div class="w-full flex flex-col justify-center items-center rounded shadow-lg bg-white">';
+          coins += '<img class="coin-img w-16 h-16" src="coins/' + item.symbol + '.svg" alt="' + item.id + '">';
+          coins += '<h2 class="coin-header capitalize">'+ item.rank + '. '+ item.id + '<span> (' + item.symbol + ')</span></h2><h5 class="coin-price-usd">$' + ThousandSep(Math.floor(item.priceUsd)) + '</h5>';
+          coins += '<h6 class="coin-price-irr rtl">' + ThousandSep(Math.floor(item.priceUsd * dollarp / 10)) + ' تومان </h6><h3 class="coin-per">' + parseFloat(item.changePercent24Hr).toFixed(2) + ' %</h3></div>';
 
         });
         document.getElementById('coins_outer').innerHTML = coins;
@@ -99,12 +101,10 @@ fetch("/simple-data/2.json")
       case 'usdc':
       cryptofarsi = "یو اس دی کوین";
       break;
-
-
       default:
       cryptofarsi = item;
     }
-      market_caps += '<tr><td class="w-1/2 text-center py-3 px-4">' + parseFloat(percentage[item]).toFixed(2) + '</td><td class="w-1/2 text-center py-3 px-4"> '+ cryptofarsi + ' </td></tr>';
+      market_caps += '<tr><td class="w-2/3 text-right py-3 px-4"><img class="w-6 h-6 inline-block" src="coins/' + item + '.svg" alt="' + item + '"> '+ cryptofarsi + ' </td><td class="w-1/3 text-center py-3 px-4">' + parseFloat(percentage[item]).toFixed(2) + ' %</td></tr>';
 
   }
   document.getElementById('market_caps').innerHTML = market_caps;
