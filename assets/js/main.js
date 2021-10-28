@@ -104,7 +104,7 @@ fetch("/simple-data/2.json")
       default:
       cryptofarsi = item;
     }
-      market_caps += '<tr><td class="w-2/3 text-right py-3 px-4"><img class="w-6 h-6 inline-block" src="coins/' + item + '.svg" alt="' + item + '"> '+ cryptofarsi + ' </td><td class="w-1/3 text-center py-3 px-4">' + parseFloat(percentage[item]).toFixed(2) + ' %</td></tr>';
+      market_caps += '<tr class="odd:bg-orange-50"><td class="w-2/3 text-right py-3 px-4 border border-orange-200"><img class="w-6 h-6 inline-block" src="coins/' + item + '.svg" alt="' + item + '"> '+ cryptofarsi + ' </td><td class="w-1/3 text-center py-3 px-4 border border-orange-200">' + parseFloat(percentage[item]).toFixed(2) + ' %</td></tr>';
 
   }
   document.getElementById('market_caps').innerHTML = market_caps;
