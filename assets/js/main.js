@@ -46,10 +46,10 @@ fetch(myRequest)
 
         var coins = "";
         data.data.forEach((itemData) => {
-          coins += '<div class="flex-1 w-1/5 rounded overflow-hidden shadow-lg"><div class="coins-card"><div class="coin-header">';
-          coins += +itemData.rank + '<img class="coin-img w-16" src="coins/' + itemData.symbol + '.svg" alt="' + itemData.id + '">';
+          coins += '<div class="w-full flex flex-col justify-center items-center rounded shadow-lg">';
+          coins += +itemData.rank + '<img class="coin-img w-16 h-16" src="coins/' + itemData.symbol + '.svg" alt="' + itemData.id + '">';
           coins += '<h2 class="coin-header">' + itemData.id + '<span>' + itemData.symbol + '</span></h2><h5 class="coin-price-usd"> ' + itemData.priceUsd + '</h5><h6 class="coin-price-irr">' + itemData.priceUsd * dollarp + ' ریال </h6><h3 class="coin-per">' + parseFloat(itemData.changePercent24Hr).toFixed(2) + ' %</h3>';
-          coins += '</div></div></div>';
+          coins += '</div>';
 
         });
         document.getElementById('coins_outer').innerHTML = coins;
@@ -104,7 +104,7 @@ fetch("/simple-data/2.json")
       default:
       cryptofarsi = item;
     }
-      market_caps += '<th><td>' + cryptofarsi + '</td><td> '+ parseFloat(percentage[item]).toFixed(2)  + ' </td></th>';
+      market_caps += '<tr><td class="w-1/2 text-center py-3 px-4">' + parseFloat(percentage[item]).toFixed(2) + '</td><td class="w-1/2 text-center py-3 px-4"> '+ cryptofarsi + ' </td></tr>';
 
   }
   document.getElementById('market_caps').innerHTML = market_caps;
