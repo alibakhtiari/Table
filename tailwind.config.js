@@ -20,7 +20,9 @@ module.exports = {
         },
     },
     variants: {
-        extend: {},
+        extend: {
+            tableLayout: ['hover', 'focus'],
+        },
     },
     plugins: [],
 }
