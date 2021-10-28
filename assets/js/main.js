@@ -64,7 +64,8 @@ fetch("/simple-data/2.json")
 .then(datagecko => {
       return percentage = datagecko.data.market_cap_percentage;
 }).then( ali =>{
-  var market_caps = "";
+  var market_caps = "",
+  item;
   for (item in percentage){
     var cryptofarsi =""
     switch(item){
