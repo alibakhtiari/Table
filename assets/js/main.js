@@ -1,5 +1,5 @@
 import '../css/style.css'
-
+/*
 var requestOptions = {
     method: 'GET',
     redirect: 'follow'
@@ -15,3 +15,19 @@ var requestOptions = {
     
     promise.then(result => console.log(result)),
     promise.catch(error => console.log(error));
+
+*/        
+var promise = Promise.race([
+  fetch('/simple-data/1.json')
+  .then(function (response) {
+      return response.json();
+  }),
+  new Promise((resolve, reject) =>
+      setTimeout(() => reject(new Error('Timeout')), 3200)
+  )
+]);
+promise.then(result => console.log(result.data)),
+promise.catch(error => console.log(error));
+if (result.data.length > 0) {
+  console.log('ok')
+}
