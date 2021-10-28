@@ -12,7 +12,8 @@ module.exports = {
                 fuchsia: colors.fuchsia,
                 cyan: colors.cyan,
                 emerald: colors.emerald,
-                teal: colors.teal
+                teal: colors.teal,
+                orange: colors.orange
             },
             container: {
                 center: true,
@@ -22,6 +23,8 @@ module.exports = {
     variants: {
         extend: {
             tableLayout: ['hover', 'focus'],
+            backgroundColor: ['odd'],
+            padding: ['hover'],
         },
     },
     plugins: [],
