@@ -57,3 +57,55 @@ fetch(myRequest)
       }
     })
 })
+
+var percentage = {};
+fetch("/simple-data/2.json")
+.then(resgecko => resgecko.json())
+.then(datagecko => {
+      return percentage = datagecko.data.market_cap_percentage;
+}).then( ali =>{
+  var market_caps = "";
+  for (item in percentage){
+    var cryptofarsi =""
+    switch(item){
+      case 'btc':
+      cryptofarsi = "بیت کوین";
+      break;
+      case 'eth':
+      cryptofarsi = "اتریوم";
+      break;
+      case 'bnb':
+      cryptofarsi = "بایننس کوین";
+      break;
+      case 'usdt':
+      cryptofarsi = "اتریوم";
+      break;
+      case 'ada':
+      cryptofarsi = "کاردانو";
+      break;
+      case 'sol':
+      cryptofarsi = "سولانا";
+      break;
+      case 'xrp':
+      cryptofarsi = "ریپل";
+      break;
+      case 'dot':
+      cryptofarsi = "پولکادات";
+      break;
+      case 'shib':
+      cryptofarsi = "شیبا اینو";
+      break;
+      case 'usdc':
+      cryptofarsi = "یو اس دی کوین";
+      break;
+
+
+      default:
+      cryptofarsi = item;
+    }
+      market_caps += '<th><td>' + cryptofarsi + '</td><td> '+ parseFloat(percentage[item]).toFixed(2)  + ' </td></th>';
+
+  }
+  document.getElementById('market_caps').innerHTML = market_caps;
+})
+
