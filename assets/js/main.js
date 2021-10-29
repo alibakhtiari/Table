@@ -35,6 +35,18 @@ if (result.data.length > 0) {
 function ThousandSep(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+function numberFormatter(num) {
+  if (num > 999 &&  num < 1000000) {
+     return (num / 1000).toFixed(1) + ' هزار دلار'; 
+  } else if (num > 1000000 && num < 1000000000) {
+     return (num / 1000000).toFixed(1) + ' میلیون دلار'; 
+  } else if (num > 1000000000) {
+    return (num / 1000000000).toFixed(1) + ' میلیارد دلار'; 
+  } else if (num < 900) {
+     return num; 
+  }
+}
 var dollarp = 0;
 const myRequest = new Request('https://api.accessban.com/v1/data/sana/json');
 fetch(myRequest)
@@ -46,15 +58,24 @@ fetch(myRequest)
     .then(res => res.json())
     .then(data => {
       if (data.data.length > 0) {
-        var coins = "";
+        var coins = "",
+        color;
         data.data.forEach((item) => {
-          coins += '<div class="w-full flex flex-col justify-center items-center rounded shadow-lg bg-white">';
+          if(parseFloat(item.changePercent24Hr).toFixed(2) > 0){
+            color = 'bg-green-300'
+          }
+          else{
+            color = 'bg-red-300'
+          }
+          coins += '<div class="w-full flex flex-col justify-center items-center rounded shadow-lg bg-orange-50">';
           coins += '<img class="coin-img w-16 h-16" src="coins/' + item.symbol + '.svg" alt="' + item.id + '">';
-          coins += '<h2 class="coin-header capitalize">'+ item.rank + '. '+ item.id + '<span> (' + item.symbol + ')</span></h2><h5 class="coin-price-usd">$' + ThousandSep(Math.floor(item.priceUsd)) + '</h5>';
-          coins += '<h6 class="coin-price-irr rtl">' + ThousandSep(Math.floor(item.priceUsd * dollarp / 10)) + ' تومان </h6><h3 class="coin-per">' + parseFloat(item.changePercent24Hr).toFixed(2) + ' %</h3></div>';
-
+          coins += '<h2 class="coin-header capitalize ltr text-center font-bold">'+ item.rank + '. '+ item.id + '<br><span class="text-xs"> (' + item.symbol + ')</span></h2>';
+          coins +=  '<div class="flex justify-center align-middle text-center items-center"><div><h5 class="coin-price-usd">$' + ThousandSep(parseFloat(item.priceUsd).toFixed(2)) + '</h5><h6 class="rtl">' + ThousandSep(Math.floor(item.priceUsd * dollarp / 10)) + ' تومان </h6></div><div class="pl-5"><h3 id="coin_percentage" class="px-2 py-5 text-sm rounded-full font-bold '+ color +' ">' + parseFloat(item.changePercent24Hr).toFixed(2) + '%</h3></div></div>';
+          coins +='<div class="rtl text-xs inline-flex"><h6 class="pl-5 font-semibold">حجم بازار:</h6><span class="">'+ numberFormatter(item.marketCapUsd) +'</span></div></div>'
+          
         });
         document.getElementById('coins_outer').innerHTML = coins;
+        
 
       }
     })
@@ -109,4 +130,6 @@ fetch("/simple-data/2.json")
   }
   document.getElementById('market_caps').innerHTML = market_caps;
 })
+
+
 
