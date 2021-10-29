@@ -59,13 +59,15 @@ fetch(myRequest)
     .then(data => {
       if (data.data.length > 0) {
         var coins = "",
-        color,bg_color;
+        color,bg_color,bg_shade;
         data.data.forEach((item) => {
           if(parseFloat(item.changePercent24Hr).toFixed(2) > 0){
             bg_color = 'bg-green-400';
+            bg_shade = 'bg-green-50';
           }
           else{
-            bg_color = 'bg-red-400'
+            bg_color = 'bg-red-400';
+            bg_shade = 'bg-red-50';
           }
           if(parseFloat(item.vwap24Hr*item.changePercent24Hr/100).toFixed(2) > 0){
             color = 'text-green-500';
@@ -73,7 +75,7 @@ fetch(myRequest)
           else{
             color = 'text-red-500'
           }
-          coins += '<div class="w-full flex flex-col justify-center items-center rounded shadow-lg bg-orange-100">';
+          coins += '<div class="w-full flex flex-col justify-center items-center shadow-lg '+ bg_shade +' rounded-lg">';
           coins += '<img class="coin-img w-14 h-14 mt-5" src="coins/' + item.symbol + '.svg" alt="' + item.id + '">';
           coins += '<h2 class="coin-header capitalize ltr text-center font-bold p-2">'+ item.rank + '. '+ item.id + '<br><span class="text-xs"> (' + item.symbol + ')</span></h2>';
           coins += '<div class="flex justify-center align-middle text-center items-center p-2"><div><h5 class="coin-price-usd">$' + ThousandSep(parseFloat(item.priceUsd).toFixed(2)) + '</h5><h6 class="rtl">' + ThousandSep(Math.floor(item.priceUsd * dollarp / 10)) + ' تومان </h6></div><div class="pl-5"><h3 id="coin_percentage" class="flex align-middle justify-center items-center p-2 text-sm rounded-full font-bold '+ bg_color +' text-white w-14 h-14">' + parseFloat(item.changePercent24Hr).toFixed(2) + '%</h3></div></div>';
@@ -147,7 +149,7 @@ function showdate() {
       month = a.getMonth()+1, 
       year = a.getYear(),
       hour = a.getHours(),
-      min = a.getMinutes(), 
+      min = (a.getMinutes()<10?'0':'') + a.getMinutes(), 
       y,i;
   year=(window.navigator.userAgent.indexOf('MSIE')>0)? year:1900+year;
   if (year== 0){year=2000;} 
@@ -213,6 +215,6 @@ if (y==3) {
      default:          break; 
       } 
       }
-      document.getElementById("date_place_holder").innerHTML =  "بروز رسانی : امروز " +  week[d]+" "+day+" "+months[month-1]+" ساعت " + hour + ":" + min;
+      document.getElementById("date_place_holder").innerHTML =   week[d]+" "+day+" "+months[month-1]+" ساعت: " + hour + ":" + min;
 }
 showdate();
