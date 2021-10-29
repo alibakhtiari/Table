@@ -213,6 +213,6 @@ if (y==3) {
      default:          break; 
       } 
       }
-      document.getElementById("date_place_holder").innerHTML =  "بروز رسانی : امروز " +  week[d]+" "+day+" "+months[month-1]+" "+ year + " ساعت " + hour + ":" + min;
+      document.getElementById("date_place_holder").innerHTML =  "بروز رسانی : امروز " +  week[d]+" "+day+" "+months[month-1]+" ساعت " + hour + ":" + min;
 }
 showdate();
