@@ -91,7 +91,7 @@ fetch(myRequest)
 })
 
 var percentage = {};
-fetch("/simple-data/2.json")
+fetch("https://api.coingecko.com/api/v3/global")
 .then(resgecko => resgecko.json())
 .then(datagecko => {
       return percentage = datagecko.data.market_cap_percentage;
