@@ -1,4 +1,5 @@
 const { resolve } = require('path')
+
 export default {
     plugins: [],
     server: {
