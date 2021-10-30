@@ -2,12 +2,34 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 .rtl{
   direction: rtl
 }
 .ltr{
   direction: ltr
+}
+.ph-anim{
+  -webkit-animation: linear 1s ph-anim infinite;
+animation: linear 1s ph-anim infinite;
+background: #ccc;
+background: linear-gradient(to right, #ddd 8%, #aaa 18%, #ddd 33%);
+background-size: 800px 104px;}
+@-webkit-keyframes ph-anim {
+0% {
+background-position: -468px 0;
+}
+100% {
+background-position: 468px 0;
+}
+}
+
+@keyframes ph-anim {
+0% {
+background-position: -468px 0;
+}
+100% {
+background-position: 468px 0;
+}
 }
 @tailwind base;
 @tailwind components;
