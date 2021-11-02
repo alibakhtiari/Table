@@ -38,11 +38,11 @@ function ThousandSep(x) {
 
 function numberFormatter(num) {
   if (num > 999 &&  num < 1000000) {
-     return (num / 1000).toFixed(1) + ' هزار دلار'; 
+     return (num / 1000).toFixed(1) + ' هزار‌دلار'; 
   } else if (num > 1000000 && num < 1000000000) {
-     return (num / 1000000).toFixed(1) + ' میلیون دلار'; 
+     return (num / 1000000).toFixed(1) + ' میلیون‌دلار'; 
   } else if (num > 1000000000) {
-    return (num / 1000000000).toFixed(1) + ' میلیارد دلار'; 
+    return (num / 1000000000).toFixed(1) + ' میلیارد‌دلار'; 
   } else if (num < 900) {
      return num; 
   }
@@ -102,13 +102,13 @@ fetch("https://api.coingecko.com/api/v3/global")
     var cryptofarsi =""
     switch(item){
       case 'btc':
-      cryptofarsi = "بیت کوین";
+      cryptofarsi = "بیت‌کوین";
       break;
       case 'eth':
       cryptofarsi = "اتریوم";
       break;
       case 'bnb':
-      cryptofarsi = "بایننس کوین";
+      cryptofarsi = "بایننس‌کوین";
       break;
       case 'usdt':
       cryptofarsi = "اتریوم";
@@ -129,12 +129,15 @@ fetch("https://api.coingecko.com/api/v3/global")
       cryptofarsi = "شیبا اینو";
       break;
       case 'usdc':
-      cryptofarsi = "یو اس دی کوین";
+      cryptofarsi = "یو‌اس‌دی کوین";
+      break;
+      case 'doge':
+      cryptofarsi = "دوج‌کوین";
       break;
       default:
       cryptofarsi = item;
     }
-      market_caps += '<tr class="odd:bg-orange-100"><td class="w-2/3 text-right py-3 px-4 border border-orange-200"><img class="w-6 h-6 inline-block" src="coins/' + item + '.svg" alt="' + item + '"> '+ cryptofarsi + ' </td><td class="w-1/3 text-center py-3 px-4 border border-orange-200">' + parseFloat(percentage[item]).toFixed(2) + ' %</td></tr>';
+      market_caps += '<tr class="odd:bg-orange-100"><td class="w-8/12 lg:w-7/12 text-right py-3 px-4 border border-orange-200"><img class="w-6 h-6 inline-block" src="coins/' + item + '.svg" alt="' + item + '"> '+ cryptofarsi + ' </td><td class="w-4/12 lg:w-5/12 text-center py-3 px-4 border border-orange-200">' + parseFloat(percentage[item]).toFixed(2) + ' %</td></tr>';
 
   }
   document.getElementById('market_caps').innerHTML = market_caps;
