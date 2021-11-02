@@ -10,6 +10,18 @@ module.exports = {
     },
     darkMode: false,
     theme: {
+        screens: {
+            '2xl': {'max': '1535px'},
+      
+            'xl': {'max': '1279px'},
+      
+            'lg': {'max': '1024px'},
+      
+            'md': {'max': '768px'},
+
+            'sm': {'max': '480px'},
+
+          },
         extend: {
             colors: {
                 fuchsia: colors.fuchsia,
