@@ -47,19 +47,21 @@ function numberFormatter(num) {
      return num; 
   }
 }
-var dollarp = 0;
-const myRequest = new Request('https://api.accessban.com/v1/data/sana/json');
-fetch(myRequest)
-.then(response => response.json())
+var dollarp;
+//const myRequest = new Request('');
+fetch('https://api.accessban.com/v1/data/sana/json')
+.then(res => res.json())
 .then(data => {
-  return dollarp = parseFloat(data.sana.data[16].p);
-}).then(ali => {
+  dollarp = data.sana.data[16].p;
+  document.querySelector('.dollar_price').innerHTML = dollarp;
+})
+
   fetch("/simple-data/1.json")
     .then(res => res.json())
     .then(data => {
       if (data.data.length > 0) {
         var coins = "",
-        color,bg_color,bg_shade;
+        color,bg_color,bg_shade,dp = document.querySelector('.dollar_price').innerHTML;
         data.data.forEach((item) => {
           if(parseFloat(item.changePercent24Hr).toFixed(2) > 0){
             bg_color = 'bg-green-400';
@@ -78,17 +80,16 @@ fetch(myRequest)
           coins += '<div class="w-full flex flex-col justify-center items-center shadow-lg '+ bg_shade +' rounded-lg">';
           coins += '<img class="coin-img w-14 h-14 mt-5" src="coins/' + item.symbol + '.svg" alt="' + item.id + '">';
           coins += '<h2 class="coin-header capitalize ltr text-center font-bold p-2">'+ item.rank + '. '+ item.id + '<br><span class="text-xs"> (' + item.symbol + ')</span></h2>';
-          coins += '<div class="flex justify-center align-middle text-center items-center p-2"><div><h5 class="coin-price-usd">$' + ThousandSep(parseFloat(item.priceUsd).toFixed(2)) + '</h5><h6 class="rtl">' + ThousandSep(Math.floor(item.priceUsd * dollarp / 10)) + ' تومان </h6></div><div class="pl-5"><h3 id="coin_percentage" class="flex align-middle justify-center items-center p-2 text-sm rounded-full font-bold '+ bg_color +' text-white w-14 h-14">' + parseFloat(item.changePercent24Hr).toFixed(2) + '%</h3></div></div>';
+          coins += '<div class="flex justify-center align-middle text-center items-center p-2"><div><h5 class="coin-price-usd">$' + ThousandSep(parseFloat(item.priceUsd).toFixed(2)) + '</h5><h6 class="rtl">' + ThousandSep(Math.floor(item.priceUsd * dp / 10)) + ' تومان </h6></div><div class="pl-5"><h3 id="coin_percentage" class="flex align-middle justify-center items-center p-2 text-sm rounded-full font-bold '+ bg_color +' text-white w-14 h-14">' + parseFloat(item.changePercent24Hr).toFixed(2) + '%</h3></div></div>';
           coins += '<div class="text-right m-5 p-3 bg-white border border-orange-300 rtl text-xs"><div class="inline-flex py-2 justify-between w-full"><h6 class="pl-5 font-semibold">حجم بازار:</h6><span class="font-bold">'+ numberFormatter(item.marketCapUsd) +'</span></div>';
           coins += '<div class="inline-flex pb-2 w-full justify-between"><h6 class="pl-5 font-semibold">تغییرات 24 ساعته:</h6><span class="'+ color +' ltr font-bold">'+ ThousandSep(parseFloat(item.vwap24Hr*item.changePercent24Hr/100).toFixed(2)) +'</span><span class="'+ color +' pr-1 font-bold"> دلار</span></div></div></div>';
           
         });
-        document.getElementById('coins_outer').innerHTML = coins;
-        
+        document.getElementById('coins_outer').innerHTML = coins; 
 
       }
     })
-})
+
 
 var percentage = {};
 fetch("https://api.coingecko.com/api/v3/global")
