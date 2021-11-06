@@ -217,15 +217,7 @@ fetch('https://api.accessban.com/v1/data/sana/json' , requestOptions)
     return dollarp = data.sana.data[16].p;
   })
   .then(function get_cc_p() {
-    fetch("https://api.coincap.io/v2/assets?limit=10" , {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Authorization' : 'Bearer 2757b0e4-f659-4443-9624-33920b8314a8'
-
-      }})
+    fetch("https://api.coincap.io/v2/assets?limit=10" , requestOptions)
     .then(status)
     .then(json)
     .then(function (data) {
