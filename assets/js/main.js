@@ -222,7 +222,7 @@ fetch('https://api.accessban.com/v1/data/sana/json' , requestOptions)
     .then(status)
     .then(json)
     .then(function (data) {
-      if (data.data.length > 0) {
+      if (data.length > 0) {
         var coins = "",color, bg_color, bg_shade;
         data.forEach((item) => {
           if (item.price_change_percentage_24h > 0) {
