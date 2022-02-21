@@ -1,2 +1,7 @@
 node_modules
 dist
+*.xlsx
+public/simple-data/asicminervalue.com.xlsx
+public/simple-data/v3.antpool.comhome2.csv
+public/simple-data/v3.antpool.comhome2.xlsx
+public/simple-data/asicminervalue.com.xlsx
