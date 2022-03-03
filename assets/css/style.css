@@ -1,15 +1,16 @@
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
 }
-.rtl{
-  direction: rtl
-}
-.ltr{
-  direction: ltr
-}
-.ph-anim{
-  -webkit-animation: linear 1s ph-anim infinite;
+#app .error_handle{display: none;}
+#app.error .error_handle{display:flex;position:absolute;width:100%;height:100%;justify-content:center;background-color:rgba(0,0,0,0.4);align-items: center;}
+#app.error .error_handle h2{color: #fff;}
+#app.error .error_handle button{background-color: #FF9800;padding: 8px 12px;margin: 20px;border-radius: 7px;color: #fff;}
+#app.error .error_handle button:hover{background-color: #ff7b00;}
+.rtl{direction:rtl}
+.ltr{direction:ltr}
+.ph-anim{-webkit-animation: linear 1s ph-anim infinite;
 animation: linear 1s ph-anim infinite;
 background: #ccc;
 background: linear-gradient(to right, #ddd 8%, #aaa 18%, #ddd 33%);
