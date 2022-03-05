@@ -2,7 +2,7 @@ const colors = require('tailwindcss/colors')
 module.exports = {
     corePlugins: {
         preflight: false,
-    }
+    },
     purge: {
         enabled: true,
         content:[
